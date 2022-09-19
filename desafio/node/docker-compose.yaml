@@ -13,6 +13,9 @@ services:
     tty: true
     ports:
       - "3000:3000"
+    depends_on:
+      - nginx
+      - db
   
   nginx:
     image: italog09/nginx
@@ -22,19 +25,19 @@ services:
     ports: 
       - "8080:80"
 
-  # db:
-  #   image: mysql:5.7
-  #   command: --innodb-use-native-aio=0
-  #   container_name: db
-  #   restart: always
-  #   tty: true
-  #   volumes:
-  #     - ./mysql:/var/lib/mysql
-  #   environment:
-  #     - MYSQL_DATABASE=nodedb
-  #     - MYSQL_ROOT_PASSWORD=root
-  #   networks:
-  #     - node-network
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - node_network
 
 networks:
   node_network:
