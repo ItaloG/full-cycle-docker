@@ -1,0 +1,12 @@
+# FROM "PUSHA" (PULL) UMA IMAGEM DO DOCKER HUB
+FROM nginx:latest
+
+# WORKDIR DEFINE QUAL A PASATA PRINCIAPAL DA IMAGEM 
+WORKDIR /app
+
+# RUN EXECUTA UM COMANDO NA CRIAÇÃO DA IMAGEM
+RUN apt-get update && \
+    apt-get install vim -y
+
+# COPY COPIA UM DIRETORIO PARA DENTRO DA IMAGEM
+COPY html/ /usr/share/nginx/html
